@@ -37,4 +37,9 @@ int main()
     #pragma endregion
 
     Memory::External memory = Memory::External("Minecraft.Windows.exe", true);
+
+    #pragma region Address stuff
+    Address fov_base_addr = memory.getModule("Minecraft.Windows.exe");
+    Address fov_addr = memory.getAddress(fov_base_addr + 0x0487B460, { 0x10, 0x170, 0x18 });
+    #pragma endregion
 }
