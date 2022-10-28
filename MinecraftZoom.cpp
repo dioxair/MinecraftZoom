@@ -25,6 +25,8 @@ inline bool is_process_running(const wchar_t* processName)
 
 int main()
 {
+    char hotkey;
+
     #pragma region is Minecraft open check
     const wstring name(L"Minecraft.Windows.exe");
     const wchar_t* mc_process_name = name.c_str();
@@ -42,4 +44,20 @@ int main()
     Address fov_base_addr = memory.getModule("Minecraft.Windows.exe");
     Address fov_addr = memory.getAddress(fov_base_addr + 0x0487B460, { 0x10, 0x170, 0x18 });
     #pragma endregion
+
+    cout << "Input the hotkey you would like to use for zoom: ";
+
+    cin >> hotkey;
+
+    hotkey = toupper(hotkey);
+
+    if (!isalpha(hotkey)) // check if user inputted hotkey is apart of the alphabet
+    {
+        cout << "Hotkey must be apart of the English Alphabet!" << endl;
+        return 1;
+    }
+
+    cout << "\nThe hotkey you chose is: " << hotkey << endl;
+
+    cout << "\nRunning Minecraft Zoom...";
 }
