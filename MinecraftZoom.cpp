@@ -24,6 +24,16 @@ inline bool is_process_running(const wchar_t* processName)
     return exists;
 }
 
+inline bool check_window_focus()
+{
+    // if MinecraftZoom is focused
+    if (GetConsoleWindow() == GetForegroundWindow())
+    {
+        return true;
+    }
+    return false;
+}
+
 int main()
 {
     char hotkey;
@@ -62,11 +72,21 @@ int main()
 
     cout << "\nRunning Minecraft Zoom..." << endl;
 
+    cout << "\nPress the ESCAPE key to exit...";
+
     float original_fov = memory.read<float>(fov_addr);
 
     while (true)
     {
         Sleep(5);
+
+        if (check_window_focus())
+        {
+            if (GetAsyncKeyState(VK_ESCAPE))
+            {
+                break;
+            }
+        }
 
         if (GetAsyncKeyState(hotkey) & 0x8000)
         {
