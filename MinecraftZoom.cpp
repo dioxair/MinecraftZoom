@@ -48,8 +48,6 @@ int main()
 
     cout << "Input the hotkey you would like to use for zoom: ";
 
-    std::ofstream outfile("hotkey.txt");
-
     cin >> hotkey;
 
     hotkey = toupper(hotkey);
@@ -62,9 +60,5 @@ int main()
 
     cout << "\nThe hotkey you chose is: " << hotkey << endl;
 
-    outfile << "hotkey:" << hotkey << std::endl;
-
     cout << "\nRunning Minecraft Zoom...";
-
-    outfile.close();
 }
