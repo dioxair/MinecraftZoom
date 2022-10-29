@@ -60,5 +60,21 @@ int main()
 
     cout << "\nThe hotkey you chose is: " << hotkey << endl;
 
-    cout << "\nRunning Minecraft Zoom...";
+    cout << "\nRunning Minecraft Zoom..." << endl;
+
+    float original_fov = memory.read<float>(fov_addr);
+
+    while (true)
+    {
+        Sleep(5);
+
+        if (GetAsyncKeyState(hotkey) & 0x8000)
+        {
+            memory.write<float>(fov_addr, 30, true);
+        }
+        else
+        {
+            memory.write<float>(fov_addr, original_fov, true);
+        }
+    }
 }
